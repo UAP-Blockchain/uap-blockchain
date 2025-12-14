@@ -1,0 +1,32 @@
+=============== Dec 14, 2025 (UTC) ===============
+15:09:37.316513 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:09:37.343736 db@open opening
+15:09:37.352467 version@stat F·[] S·0B[] Sc·[]
+15:09:37.360995 db@janitor F·2 G·0
+15:09:37.361695 db@open done T·17.348418ms
+15:09:37.389879 db@close closing
+15:09:37.398115 db@close done T·8.22911ms
+=============== Dec 14, 2025 (UTC) ===============
+15:10:50.370022 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+15:10:50.389694 version@stat F·[] S·0B[] Sc·[]
+15:10:50.391977 db@open opening
+15:10:50.398123 journal@recovery F·1
+15:10:50.399162 journal@recovery recovering @1
+15:10:50.445461 memdb@flush created L0@2 N·22 S·1KiB "\x00\xf4c..\xe0|\x82,v12":"\xd0N\a..\xa9\x9f+,v10"
+15:10:50.451846 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+15:10:50.531040 db@janitor F·3 G·0
+15:10:50.531493 db@open done T·138.714253ms
+15:10:50.552282 db@close closing
+15:10:50.572204 db@close done T·19.909803ms
+=============== Dec 14, 2025 (UTC) ===============
+19:40:37.162390 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:40:37.173140 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+19:40:37.174129 db@open opening
+19:40:37.176744 journal@recovery F·1
+19:40:37.177242 journal@recovery recovering @3
+19:40:37.186109 memdb@flush created L0@5 N·1 S·547B "eth..\xf2\xb8\x17,v24":"eth..\xf2\xb8\x17,v24"
+19:40:37.188754 version@stat F·[2] S·2KiB[2KiB] Sc·[0.50]
+19:40:37.213418 db@janitor F·4 G·0
+19:40:37.213748 db@open done T·39.355637ms
+19:40:37.221549 db@close closing
+19:40:37.223569 db@close done T·2.017686ms

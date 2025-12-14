@@ -2,27 +2,47 @@
 
 ## Overview
 
-This directory contains configuration files for setting up a 3-node Ethereum Quorum network using Docker Compose.
+This directory contains configuration files for setting up a 4-node Ethereum Quorum network using Docker Compose.
 
 ## Network Architecture
 
 ```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Node 1        │     │   Node 2        │     │   Node 3        │
-│   (Primary)     │────▶│   (Validator)   │────▶│   (Validator)   │
-│                 │     │                 │     │                 │
-│   Port: 22000   │     │   Port: 22002   │     │   Port: 22004   │
-│   WS: 22001     │     │   WS: 22003     │     │   WS: 22005     │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
+┌─────────────────┐
+│   Gateway       │
+│ (RPC / WS only) │
+│                 │
+│   HTTP: 22000   │
+│   WS:   22001   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Node 1        │     │   Node 2        │     │   Node 3        │     │   Node 4        │
+│   (Validator)   │────▶│   (Validator)   │────▶│   (Validator)   │────▶│   (Validator)   │
+│                 │     │                 │     │                 │     │                 │
+│   P2P: 30303    │     │   P2P: 30303    │     │   P2P: 30303    │     │   P2P: 30303    │
+└─────────────────┘     └─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
 
 ## Quick Start
+
+### One-command reset (recommended after genesis/validator changes)
+
+```powershell
+./reset-quorum.ps1 -Verify
+```
 
 ### 1. Start Quorum Network
 
 ```bash
 cd quorum-config
 docker-compose up -d
+```
+
+### Verify Validators
+
+```powershell
+./verify-validators.ps1
 ```
 
 ### 2. Check Node Status
@@ -44,12 +64,12 @@ docker logs quorum-node3
 ### 3. Verify Blockchain
 
 ```bash
-# Check block number on Node 1
+# Check block number via Gateway
 curl -X POST http://127.0.0.1:22000 \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
 
-# Check if mining
+# Check if mining (validators still mine; gateway just relays RPC)
 curl -X POST http://127.0.0.1:22000 \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":1}'
@@ -67,21 +87,16 @@ Genesis block configuration for the Quorum network:
 
 ### docker-compose.yml
 
-Docker Compose configuration for 3 Quorum nodes:
-- **Node 1** (Primary): Ports 22000 (HTTP), 22001 (WebSocket)
-- **Node 2** (Validator): Ports 22002 (HTTP), 22003 (WebSocket)
-- **Node 3** (Validator): Ports 22004 (HTTP), 22005 (WebSocket)
+Docker Compose configuration for 4 Quorum nodes:
+- **Gateway** (RPC/WS entrypoint): Ports 22000 (HTTP), 22001 (WebSocket)
+- **Node 1-4** (Validators): No host ports exposed (hardening). Nodes communicate over the internal Docker network.
 
 ## Port Mapping
 
 | Service | Host Port | Container Port | Protocol |
 |---------|-----------|----------------|----------|
-| Node 1 HTTP | 22000 | 8545 | JSON-RPC |
-| Node 1 WS | 22001 | 8546 | WebSocket |
-| Node 2 HTTP | 22002 | 8545 | JSON-RPC |
-| Node 2 WS | 22003 | 8546 | WebSocket |
-| Node 3 HTTP | 22004 | 8545 | JSON-RPC |
-| Node 3 WS | 22005 | 8546 | WebSocket |
+| Gateway HTTP | 22000 | 8545 | JSON-RPC |
+| Gateway WS | 22001 | 8546 | WebSocket |
 
 ## Management Commands
 
@@ -144,6 +159,14 @@ curl -X POST http://127.0.0.1:22002 \
 curl -X POST http://127.0.0.1:22004 \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+
+### Test Node 4
+
+```bash
+curl -X POST http://127.0.0.1:22006 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+```
 ```
 
 ## Troubleshooting

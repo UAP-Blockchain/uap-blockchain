@@ -15,7 +15,7 @@ const __dirname = path.dirname(__filename);
 async function main() {
   const universityAddress =
     process.env.UNIVERSITY_MANAGEMENT_ADDRESS ||
-    "0x829220b05683027a3E8FC72A641d9e6BE18a4152";
+    "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
   if (!universityAddress) {
     console.error(

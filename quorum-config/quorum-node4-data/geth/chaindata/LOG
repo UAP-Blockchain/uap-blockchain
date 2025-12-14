@@ -1,0 +1,20 @@
+=============== Dec 14, 2025 (UTC) ===============
+19:40:37.119273 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:40:37.137454 db@open opening
+19:40:37.142655 version@stat F·[] S·0B[] Sc·[]
+19:40:37.147478 db@janitor F·2 G·0
+19:40:37.147941 db@open done T·10.2387ms
+19:40:37.154853 db@close closing
+19:40:37.156217 db@close done T·1.360896ms
+=============== Dec 14, 2025 (UTC) ===============
+19:40:37.315293 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:40:37.325133 version@stat F·[] S·0B[] Sc·[]
+19:40:37.326350 db@open opening
+19:40:37.329290 journal@recovery F·1
+19:40:37.330281 journal@recovery recovering @1
+19:40:37.339337 memdb@flush created L0@2 N·22 S·1KiB "\x00\xf4c..\xe0|\x82,v12":"\xd0N\a..\xa9\x9f+,v10"
+19:40:37.341291 version@stat F·[1] S·1KiB[1KiB] Sc·[0.25]
+19:40:37.366719 db@janitor F·3 G·0
+19:40:37.367042 db@open done T·40.384909ms
+22:02:03.442461 db@close closing
+22:02:03.445264 db@close done T·2.82029ms
