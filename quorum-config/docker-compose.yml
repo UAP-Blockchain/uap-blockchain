@@ -12,7 +12,7 @@ services:
       - ./static-nodes.json:/data/geth/static-nodes.json
       - ./password.txt:/data/password.txt
     command:
-      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,net,web3,txpool,istanbul --http.corsdomain "http://localhost,http://127.0.0.1" --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.api eth,net,web3,txpool,istanbul --ws.origins "http://localhost,http://127.0.0.1" --syncmode full'
+      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --http --http.addr 0.0.0.0 --http.port 8545 --http.api eth,net,web3,txpool,istanbul --http.corsdomain "http://localhost,http://127.0.0.1" --http.vhosts "localhost,127.0.0.1,85.211.251.118,uap-quorum-rpc.malaysiawest.cloudapp.azure.com" --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.api eth,net,web3,txpool,istanbul --ws.origins "http://localhost,http://127.0.0.1" --syncmode full'
     networks:
       - quorum-network
 
@@ -26,7 +26,7 @@ services:
       - ./static-nodes.json:/data/geth/static-nodes.json
       - ./password.txt:/data/password.txt
     command:
-      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x7f34479456ea71e9b3ba5d95a78b1965aa75c8cf --miner.etherbase 0x7f34479456ea71e9b3ba5d95a78b1965aa75c8cf --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 5 --mine --miner.threads 1 --syncmode full'
+      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x7f34479456ea71e9b3ba5d95a78b1965aa75c8cf --miner.etherbase 0x7f34479456ea71e9b3ba5d95a78b1965aa75c8cf --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 4 --mine --miner.threads 1 --syncmode full'
     networks:
       - quorum-network
 
@@ -40,7 +40,7 @@ services:
       - ./static-nodes.json:/data/geth/static-nodes.json
       - ./password.txt:/data/password.txt
     command:
-      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x22b6d51b637ce6e3dd9ba1a734bf0e8a20bed76b --miner.etherbase 0x22b6d51b637ce6e3dd9ba1a734bf0e8a20bed76b --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 5 --mine --miner.threads 1 --syncmode full'
+      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x22b6d51b637ce6e3dd9ba1a734bf0e8a20bed76b --miner.etherbase 0x22b6d51b637ce6e3dd9ba1a734bf0e8a20bed76b --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 4 --mine --miner.threads 1 --syncmode full'
     networks:
       - quorum-network
 
@@ -54,7 +54,7 @@ services:
       - ./static-nodes.json:/data/geth/static-nodes.json
       - ./password.txt:/data/password.txt
     command:
-      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x3e8580762230b9c6377a4f23e7f76e12ac386a19 --miner.etherbase 0x3e8580762230b9c6377a4f23e7f76e12ac386a19 --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 5 --mine --miner.threads 1 --syncmode full'
+      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x3e8580762230b9c6377a4f23e7f76e12ac386a19 --miner.etherbase 0x3e8580762230b9c6377a4f23e7f76e12ac386a19 --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 4 --mine --miner.threads 1 --syncmode full'
     networks:
       - quorum-network
 
@@ -68,7 +68,7 @@ services:
       - ./static-nodes.json:/data/geth/static-nodes.json
       - ./password.txt:/data/password.txt
     command:
-      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x41eab64288d9c07131fbca4f5e704c28eacdcd23 --miner.etherbase 0x41eab64288d9c07131fbca4f5e704c28eacdcd23 --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 5 --mine --miner.threads 1 --syncmode full'
+      - 'if [ ! -d /data/geth/chaindata ]; then geth --datadir /data init /genesis.json; fi; exec geth --datadir /data --networkid 1337 --verbosity 3 --port 30303 --unlock 0x41eab64288d9c07131fbca4f5e704c28eacdcd23 --miner.etherbase 0x41eab64288d9c07131fbca4f5e704c28eacdcd23 --password /data/password.txt --allow-insecure-unlock --emitcheckpoints --istanbul.blockperiod 4 --mine --miner.threads 1 --syncmode full'
     networks:
       - quorum-network
 
