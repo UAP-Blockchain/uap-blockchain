@@ -7,7 +7,7 @@ async function main() {
   const [rich] = await ethers.getSigners();
 
   // TODO: thay địa chỉ ví teacher MetaMask của bạn vào đây
-  const teacherAddress = "0x911f34742407fddd7bc9e57d43e0d5f0869a298e";
+  const teacherAddress = "0x8f2d9e1fc05c79b869ab7c9cb1e984175cddaf4f";
 
   console.log("Rich account :", await rich.getAddress());
   console.log("Send to      :", teacherAddress);

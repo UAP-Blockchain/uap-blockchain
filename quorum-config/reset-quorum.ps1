@@ -33,15 +33,22 @@ if (-not (Test-Path $ComposeFile)) {
 Write-Info "Stopping containers..."
 docker compose -f $ComposeFile down | Out-Host
 
-Write-Info "Removing chaindata to apply updated genesis..."
-$chaindataPaths = @(
+Write-Info "Removing chaindata (and txpool journals) to apply updated genesis..."
+$resetPaths = @(
   (Join-Path $here 'quorum-gateway-data\geth\chaindata'),
   (Join-Path $here 'quorum-node1-data\geth\chaindata'),
   (Join-Path $here 'quorum-node2-data\geth\chaindata'),
   (Join-Path $here 'quorum-node3-data\geth\chaindata'),
-  (Join-Path $here 'quorum-node4-data\geth\chaindata')
+  (Join-Path $here 'quorum-node4-data\geth\chaindata'),
+
+  # Clear locally-journaled txs; otherwise old pending txs can be reloaded on startup.
+  (Join-Path $here 'quorum-gateway-data\geth\transactions.rlp'),
+  (Join-Path $here 'quorum-node1-data\geth\transactions.rlp'),
+  (Join-Path $here 'quorum-node2-data\geth\transactions.rlp'),
+  (Join-Path $here 'quorum-node3-data\geth\transactions.rlp'),
+  (Join-Path $here 'quorum-node4-data\geth\transactions.rlp')
 )
-foreach ($p in $chaindataPaths) {
+foreach ($p in $resetPaths) {
   if (Test-Path $p) {
     Write-Info "Deleting $p"
     Remove-Item -Recurse -Force $p

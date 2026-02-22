@@ -1,217 +1,150 @@
-# 🎓 UAP Blockchain - University Academic Platform on Blockchain# Sample Hardhat 3 Beta Project (`mocha` and `ethers`)
+# UAP Blockchain (University Academic Platform)
 
+This repository contains the **Blockchain** part of the “University Academic & Student Management on Blockchain” capstone project. The goal is to record and verify academic workflows (class management, attendance, grades, credentials, etc.) on a permissioned **Ethereum Quorum** network.
 
+The project uses **Hardhat (TypeScript)** to compile, test, deploy, and interact with the smart contracts.
 
-## 📋 OverviewThis project showcases a Hardhat 3 Beta project using `mocha` for tests and the `ethers` library for Ethereum interactions.
+## Overview
 
-University Academic Platform using **Ethereum Quorum** for managing academic records, credentials, attendance, and grades.
+- **Target network:** Ethereum Quorum (permissioned), can be run locally via quorum-dev-quickstart
+- **Tooling:** Hardhat + TypeScript
+- **Testing:** Solidity/TypeScript tests (depending on the current project setup)
+- **Architecture & deployment docs:** see the `docs/` folder
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+## Folder structure
 
-### 👥 Team Members
+```
+Capstone Project/
+	contracts/            # Smart contracts (Solidity)
+	scripts/              # Deploy/interaction scripts (Hardhat/Node/TS)
+	test/                 # Smart contract tests
+	quorum-config/        # Quorum-related configs/notes (if any)
+	docs/                 # Docs: overview, architecture, deployment...
+	hardhat.config.ts     # Hardhat config
+	package.json          # Scripts and dependencies
+```
 
-- **SE170107** - Nguyễn Phi Hùng (Leader)## Project Overview
+## Prerequisites
 
-- **SE170246** - Nguyễn Trung Nam
+- Node.js (recommended: LTS) + npm
+- Docker (if you run Quorum locally using the quickstart)
+- (Optional) WSL2 on Windows to run the quickstart scripts more smoothly
 
-- **SE170118** - Huỳnh Gia BảoThis example project includes:
+## Quick start (Hardhat local)
 
-- **SE170117** - Nghiêm Văn Hoàng
-
-- A simple Hardhat configuration file.
-
-**Supervisor:** Mr. Nguyễn Ngọc Lâm- Foundry-compatible Solidity unit tests.
-
-- TypeScript integration tests using `mocha` and ethers.js
-
----- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
-
-
-
-## 🚀 Quick Start## Usage
-
-
-
-### 1. Install Dependencies### Running Tests
-
-\`\`\`bash
-
-npm installTo run all the tests in the project, execute the following command:
-
-\`\`\`
-
-```shell
-
-### 2. Compile Contractsnpx hardhat test
-
-\`\`\`bash```
-
+```bash
+npm install
 npm run compile
-
-\`\`\`You can also selectively run the Solidity or `mocha` tests:
-
-
-
-### 3. Run Tests```shell
-
-\`\`\`bashnpx hardhat test solidity
-
-npm testnpx hardhat test mocha
-
-\`\`\````
-
-
-
-### 4. Deploy to Quorum### Make a deployment to Sepolia
-
-\`\`\`bash
-
-npm run deploy:quorumThis project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
-
-\`\`\`
-
-To run the deployment to a local chain:
-
----
-
-```shell
-
-## 📁 Project Structurenpx hardhat ignition deploy ignition/modules/Counter.ts
-
-```
-
-\`\`\`
-
-uap-blockchain/## Running on Quorum (private transactions)
-
-├── contracts/               # Smart contracts
-
-├── scripts/                 # Deployment scriptsThis project contains helper scripts to deploy and interact with the `CredentialManagement` contract using Quorum private transactions (Tessera).
-
-├── test/                    # Test files
-
-├── quorum-config/          # Quorum setupPrerequisites
-
-└── docs/                   # Documentation
-
-\`\`\`Quickstart (WSL2)
-
-```powershell
-
----# In WSL2 shell
-
-git clone https://github.com/ConsenSys/quorum-dev-quickstart.git
-
-## 🔧 Networkscd quorum-quickstart
-
-./run.sh up
-
-- **Hardhat Local:** http://127.0.0.1:8545 (Chain ID: 31337)# RPC ports will be printed in the quickstart output (e.g. 22000, 22001...)
-
-- **Quorum Node 1:** http://127.0.0.1:22000 (Chain ID: 1337)```
-
-- **Quorum Node 2:** http://127.0.0.1:22001 (Chain ID: 1337)
-
-Set environment
-
----1. Copy `.env.sample` to `.env` and fill values (do NOT commit `.env`).
-
-2. If you deployed using unlocked accounts on node, set `FROM_ADDRESS` and `PRIVATE_FOR`.
-
-## 📝 License3. If you prefer client-side signing, set `PRIVATE_KEY` and `PRIVATE_FOR`.
-
-MIT License
-
-## Signing and recording proofs (off-chain signature -> on-chain anchor)
-
-**⭐ Built with Ethereum Quorum**
-
-Create a `.env` file at project root with these values (example):
-
-```text
-QUORUM_RPC=http://127.0.0.1:22000
-PRIVATE_KEY=0xYOUR_ISSUER_PRIVATE_KEY
-CONTRACT_ADDRESS=0xYourDeployedContract
-PROOF='Diploma: Alice - BSc - 2025'
-# optional: PROOF_FILE=./proof.txt
-# optional: PROOF_TIMESTAMP=169xxxxxxx  (unix seconds)
-```
-
-To sign and submit the proof (TypeScript):
-
-```powershell
-npx ts-node scripts/signAndRecordProof.ts
+npm test
 ```
 
 Notes:
-- `recordProof` expects an EIP-712 typed signature over `CredentialProof { bytes32 hash; uint256 timestamp; }`.
-- The contract enforces a `MAX_PROOF_AGE` window (default 7 days) so the timestamp must be recent.
+- You can run Hardhat directly as well (e.g. `npx hardhat test`).
 
-Install deps (if not yet):
-```powershell
-npm install
-npm install web3 dotenv --save --legacy-peer-deps
+## Run Quorum locally
+
+To start a sample Quorum network (with Tessera), you can use quorum-dev-quickstart:
+
+```bash
+git clone https://github.com/ConsenSys/quorum-dev-quickstart.git
+cd quorum-dev-quickstart
+./run.sh up
 ```
 
-Deploy contract (private)
-```powershell
-npm run quorum:deploy
-```
-This will deploy using the `.env` settings and save the deployed address to `deploys/quorum.json`.
+After it starts, the quickstart output will print the RPC ports (often `22000`, `22001`, ...). For example:
 
-Issue a private credential
-```powershell
-npm run quorum:issue
-```
+- Quorum Node 1 RPC: `http://127.0.0.1:22000`
+- Quorum Node 2 RPC: often `http://127.0.0.1:22001` or `http://127.0.0.1:22002` (follow the quickstart output)
 
-Grant an issuer role (private)
-```powershell
-node scripts/quorum/grantIssuer.cjs
-```
+## Environment configuration (.env)
 
-Revoke an issuer role (private)
-```powershell
-node scripts/quorum/revokeIssuer.cjs
-```
+Create a `.env` file at the project **root** (do not commit it). Example:
 
-Send a raw private transaction (signed client-side)
-```powershell
-npm run quorum:sendRaw
-```
+```text
+# Quorum RPC URLs (defaults also exist in hardhat.config.ts)
+QUORUM_NODE_URL=http://127.0.0.1:22000
+QUORUM_NODE2_URL=http://127.0.0.1:22002
 
-Notes
-- `PRIVATE_FOR` must contain Tessera public keys (base64) for recipient nodes.
-- If using `PRIVATE_KEY` the scripts sign client-side and call `eth_sendRawPrivateTransaction`.
-- When using unlocked node accounts the scripts set `privateFor` on the transaction and call `eth_sendTransaction`.
+# Quorum chain ID (commonly 1337)
+QUORUM_CHAIN_ID=1337
 
-TypeScript scripts
-------------------
-You can also find TypeScript versions in `scripts/quorum/ts/` (useful when you wire TypeChain types). Run them with `ts-node`:
+# Provide accounts to Hardhat when using Quorum:
+# Option 1) single admin private key (simplest)
+ADMIN_PRIVATE_KEY=0xYOUR_PRIVATE_KEY
 
-```powershell
-npx ts-node scripts/quorum/ts/deploy.ts
-npx ts-node scripts/quorum/ts/issue.ts
-npx ts-node scripts/quorum/ts/grantIssuer.ts
-npx ts-node scripts/quorum/ts/revokeIssuer.ts
+# Option 2) mnemonic (Hardhat derives multiple accounts)
+# QUORUM_MNEMONIC=your twelve word mnemonic ...
+
+# (Optional) used by some scripts that read UniversityManagement state
+# You can copy it from deployments.json after deployment
+# UNIVERSITY_MANAGEMENT_ADDRESS=0x...
 ```
 
-Deployed addresses
-------------------
-Deployed addresses are written to `deploys/quorum.json` (field `latest` and an `all` array of previous deploys).
+## Deploy & interact with Quorum
 
+Scripts in `scripts/` support deployment and basic interactions (depending on each contract).
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+### Deploy to Quorum
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
+Deploying to the `quorum_local` network runs [scripts/deploy.ts](scripts/deploy.ts) and writes contract addresses to `deployments.json`:
 
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```bash
+npm run deploy:quorum
 ```
 
-After setting the variable, you can run the deployment with the Sepolia network:
+### Seed sample users/roles
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+After deployment, you can register sample users/roles (reads addresses from `deployments.json`):
+
+```bash
+npx hardhat run scripts/setup-roles.ts --network quorum_local
 ```
+
+### Utility scripts
+
+```bash
+# Verify there is contract bytecode at the addresses in deployments.json
+npx hardhat run scripts/verify.ts --network quorum_local
+
+# Inspect a transaction and try to decode input/logs (when ABI is available)
+npx hardhat run .\scripts\tx-info.ts --network quorum_local --tx 0x...
+
+# List registered users from UniversityManagement
+# Note: this script needs UNIVERSITY_MANAGEMENT_ADDRESS (or you can edit it inside the file)
+npx hardhat run scripts/list-registered-users.ts --network quorum_local
+```
+
+### Deploy on Hardhat local (optional)
+
+If you want a fast local chain for testing, start a node in one terminal:
+
+```bash
+npm run node
+```
+
+Then deploy in another terminal:
+
+```bash
+npm run deploy
+```
+
+## Documentation
+
+- See the `docs/` folder:
+	- `OVERVIEW.md`: project overview
+	- `ARCHITECTURE.md`: architecture
+	- `DEPLOYMENT.md`: deployment guide
+	- `API.md`: integration/API notes (if any)
+
+## Team
+
+- SE170107 — Nguyễn Phi Hùng (Leader)
+- SE170246 — Nguyễn Trung Nam
+- SE170118 — Huỳnh Gia Bảo
+- SE170117 — Nghiêm Văn Hoàng
+
+Supervisor: Mr. Nguyễn Ngọc Lâm
+
+## License
+
+MIT
